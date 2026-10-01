@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Analyst Intern – Take-Home Assignment | Ankalaiah Bandlamudi</title>
+  <meta name="description" content="Product Analyst Intern take-home assignment submission for Phyllo by Ankalaiah Bandlamudi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --color-primary: #0f172a;
+      --color-secondary: #475569;
+      --color-border: #e2e8f0;
+      --color-bg: #f8fafc;
+      --color-card: #ffffff;
+      --color-amber-bg: #fffbeb;
+      --color-amber-border: #fcd34d;
+      --color-amber-text: #92400e;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    header.top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #475569;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover {
+      color: #0f172a;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .btn-secondary {
+      background: #ffffff;
+      border-color: var(--color-border);
+      color: #334155;
+    }
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .hero-banner {
+      padding: 2.5rem 0 2rem;
+      background: #ffffff;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .kicker {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+    h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .metadata-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    .metadata-item span:first-child {
+      color: #94a3b8;
+      margin-right: 0.25rem;
+    }
+    .metadata-item strong {
+      color: #334155;
+      font-weight: 600;
+    }
+    .main-content {
+      padding: 2.5rem 0 4rem;
+    }
+    .section-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+    .section-subtitle {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+    }
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .task-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .task-item-kicker {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .task-item h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.35rem;
+    }
+    .task-item p {
+      font-size: 0.8125rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .serious-banner {
+      background: var(--color-amber-bg);
+      border: 1px solid var(--color-amber-border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .serious-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .serious-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: #78350f;
+      margin-bottom: 0.25rem;
+    }
+    .serious-desc {
+      font-size: 0.875rem;
+      color: #78350f;
+      line-height: 1.5;
+    }
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr.highlight-row {
+      background-color: #fffbeb;
+    }
+    .code-block {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 0.4rem 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .revenue-calc-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .rev-formula-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .rev-formula {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: #0f172a;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 0.6rem 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+    .rev-total-callout {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .email-container {
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .email-header-bar {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.75rem 1.25rem;
+      font-size: 0.8125rem;
+      color: #0f172a;
+      font-weight: 600;
+    }
+    .email-body {
+      padding: 1.5rem 1.25rem;
+      font-size: 0.9375rem;
+      color: #1e293b;
+      line-height: 1.7;
+    }
+    .email-body p {
+      margin-bottom: 1rem;
+    }
+    .email-body p:last-child {
+      margin-bottom: 0;
+    }
+    .ticket-container {
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: #ffffff;
+      padding: 1.5rem;
+    }
+    .ticket-field {
+      margin-bottom: 1.25rem;
+    }
+    .ticket-field:last-child {
+      margin-bottom: 0;
+    }
+    .ticket-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 0.35rem;
+    }
+    .ticket-val {
+      font-size: 0.875rem;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    footer.site-footer {
+      background: #ffffff;
+      border-top: 1px solid var(--color-border);
+      padding: 2rem 0;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand-title">Phyllo · Take-Home Assignment</a>
+      <ul class="nav-links">
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#task-1">Task 1</a></li>
+        <li><a href="#task-2">Task 2</a></li>
+        <li><a href="#task-3a">Task 3A</a></li>
+        <li><a href="#task-3b">Task 3B</a></li>
+        <li><a href="#assumptions">Assumption</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="window.print()">Print / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero-banner">
+    <div class="container">
+      <div class="kicker">Take-Home Assignment</div>
+      <h1>Product Analyst Intern – Take-Home Assignment</h1>
+      <div class="metadata-bar">
+        <div class="metadata-item"><span>Candidate:</span> <strong>Ankalaiah Bandlamudi</strong></div>
+        <div class="metadata-item"><span>Company:</span> <strong>Phyllo</strong></div>
+        <div class="metadata-item"><span>Role:</span> <strong>Product Analyst Intern</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container main-content">
+
+    <!-- 1. Executive Summary -->
+    <section id="summary" class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">1. Executive Summary</h2>
+        </div>
+      </div>
+      <p style="font-size: 0.9375rem; color: #334155; line-height: 1.6;">
+        This assignment involved comparing API documentation with captured API responses, calculating revenue, responding to a finance complaint, and preparing a bug report.
+      </p>
+      <div class="tasks-grid">
+        <div class="task-item">
+          <div class="task-item-kicker">Task 1</div>
+          <h3>What doesn't match?</h3>
+          <p>Compared official API documentation against captured responses to identify 5 contract mismatches, identifying the monetary format mismatch as the most serious issue.</p>
+        </div>
+        <div class="task-item">
+          <div class="task-item-kicker">Task 2</div>
+          <h3>What's the total revenue?</h3>
+          <p>Audited the 6 order totals and calculated revenue of $225.70 under the stated assumption, excluding refunded order ord_1003.</p>
+        </div>
+        <div class="task-item">
+          <div class="task-item-kicker">Task 3</div>
+          <h3>Write two things</h3>
+          <p>Composed (A) a clear, professional email reply to Priya addressing reconciliation causes, and (B) a factual engineering bug report.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Task 1: What Doesn't Match? -->
+    <section id="task-1" class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">2. Task 1 – What Doesn't Match?</h2>
+          <p class="section-subtitle">Comparison of documented API contracts against captured responses</p>
+        </div>
+      </div>
+
+      <!-- Most serious issue banner -->
+      <div class="serious-banner">
+        <div class="serious-tag">Most Serious Issue</div>
+        <div class="serious-title">Finding B – Monetary format mismatch</div>
+        <p class="serious-desc">
+          The monetary-format mismatch is the most serious because it directly affects financial calculations and reporting.
+        </p>
+      </div>
+
+      <!-- Findings Table -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 20%;">Finding</th>
+              <th style="width: 28%;">Documentation</th>
+              <th style="width: 26%;">Actual</th>
+              <th style="width: 26%;">Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Finding A – Status mismatch</strong>
+              </td>
+              <td>Documentation says status can be: pending, shipped, delivered, cancelled.</td>
+              <td><div class="code-block">orders_page1.json → ord_1003 → status = refunded</div></td>
+              <td>Clients may mishandle or reject refunded orders.</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>
+                <strong>Finding B – Monetary format mismatch</strong><br>
+                <small style="color: #92400e; font-weight: 600;">(Most serious issue)</small>
+              </td>
+              <td>Documentation says all monetary amounts are integers in the smallest currency unit.</td>
+              <td>
+                <div class="code-block">orders_page2.json → ord_1006:
+subtotal = 44.0
+tax = 3.63
+shipping = 5.99
+total = 53.62</div>
+              </td>
+              <td>This can cause incorrect financial calculations because the API format differs from the documented contract.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Finding C – Customer email mismatch</strong>
+              </td>
+              <td>Documentation says customer email is always present.</td>
+              <td><div class="code-block">orders_page2.json → ord_1005 → email = null</div></td>
+              <td>Clients assuming email is always present may fail or behave incorrectly.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Finding D – Pagination mismatch</strong>
+              </td>
+              <td>Pagination indicators indicate whether remaining records exist.</td>
+              <td>
+                <div class="code-block">orders_page1.json reports:
+has_more = false
+next_cursor = cur_8f2a19bd
+
+But orders_page2.json exists using that cursor.</div>
+              </td>
+              <td>A client relying on has_more may stop after page 1 and miss orders.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Finding E – Missing-order response mismatch</strong>
+              </td>
+              <td>Documentation says GET /v1/orders/{id} returns HTTP 404 if the order does not exist.</td>
+              <td><div class="code-block">order_ord_9999.json returns HTTP 200 with:
+order = null</div></td>
+              <td>Clients may incorrectly treat a missing order as a successful response.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. Task 2: Total Revenue -->
+    <section id="task-2" class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">3. Task 2 – Total Revenue</h2>
+          <p class="section-subtitle">Order calculation and treatment of refunded records</p>
+        </div>
+      </div>
+
+      <div class="revenue-calc-box">
+        <div class="rev-formula-label">Calculation</div>
+        <div class="rev-formula">$54.70 + $23.81 + $68.10 + $25.47 + $53.62 = $225.70</div>
+        <div class="rev-total-callout">Calculated revenue under the stated assumption: $225.70</div>
+      </div>
+
+      <!-- Orders Table with Exact Statuses -->
+      <div class="table-container" style="margin-bottom: 1.25rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Status</th>
+              <th>Amount</th>
+              <th>Treatment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono"><strong>ord_1001</strong></td>
+              <td>shipped</td>
+              <td class="mono">$54.70</td>
+              <td>Included in revenue</td>
+            </tr>
+            <tr>
+              <td class="mono"><strong>ord_1002</strong></td>
+              <td>delivered</td>
+              <td class="mono">$23.81</td>
+              <td>Included in revenue</td>
+            </tr>
+            <tr style="background: #f8fafc;">
+              <td class="mono"><strong>ord_1003</strong></td>
+              <td style="font-weight: 600;">refunded</td>
+              <td class="mono">$102.33</td>
+              <td>Excluded (refunded order)</td>
+            </tr>
+            <tr>
+              <td class="mono"><strong>ord_1004</strong></td>
+              <td>shipped</td>
+              <td class="mono">$68.10</td>
+              <td>Included in revenue</td>
+            </tr>
+            <tr>
+              <td class="mono"><strong>ord_1005</strong></td>
+              <td>delivered</td>
+              <td class="mono">$25.47</td>
+              <td>Included in revenue</td>
+            </tr>
+            <tr>
+              <td class="mono"><strong>ord_1006</strong></td>
+              <td>shipped</td>
+              <td class="mono">$53.62</td>
+              <td>Included in revenue</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 1rem;">
+        <p style="font-size: 0.875rem; color: #334155; line-height: 1.5;">
+          Assumption: ord_1003 was excluded because it is marked refunded. The provided data does not define how refunded orders should be treated for revenue, so this assumption should be confirmed with Finance.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. Task 3A: Reply to Priya -->
+    <section id="task-3a" class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">4. Task 3A – Reply to Priya</h2>
+          <p class="section-subtitle">Professional email response to Priya regarding revenue reconciliation</p>
+        </div>
+        <button class="btn btn-secondary" onclick="copyText('email-content')">Copy Email</button>
+      </div>
+
+      <div class="email-container">
+        <div class="email-header-bar">
+          Subject: Re: Revenue reconciliation
+        </div>
+        <div class="email-body" id="email-content">
+          <p>Hi Priya,</p>
+          <p>I found a few API data issues that could explain the reconciliation difference. Most importantly, one order (ord_1006) returns monetary values in decimal dollars even though the API documentation says all amounts are integers in the smallest currency unit. The API also marks ord_1003 as refunded, so I excluded it from this calculation.</p>
+          <p>Based on the six orders provided, excluding the refunded order, I calculate revenue of $225.70 under this assumption.</p>
+          <p>I would also flag the pagination and undocumented refunded-status issues because they could cause incomplete or incorrect reporting.</p>
+          <p>Best,<br>Ankalaiah</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Task 3B: Bug Report -->
+    <section id="task-3b" class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">5. Task 3B – Bug Report</h2>
+          <p class="section-subtitle">Factual engineering bug report with problem, expected, impact, and fix</p>
+        </div>
+        <button class="btn btn-secondary" onclick="copyText('bug-content')">Copy Bug Report</button>
+      </div>
+
+      <div class="ticket-container" id="bug-content">
+        <div class="ticket-field">
+          <div class="ticket-label">Title:</div>
+          <div class="ticket-val"><strong>API returns monetary amounts in decimal dollars instead of documented smallest currency units</strong></div>
+        </div>
+        <div class="ticket-field">
+          <div class="ticket-label">Problem:</div>
+          <div class="ticket-val mono">GET /v1/orders?starting_after=cur_8f2a19bd returns ord_1006 with:
+subtotal = 44.0
+tax = 3.63
+shipping = 5.99
+total = 53.62</div>
+        </div>
+        <div class="ticket-field">
+          <div class="ticket-label">Expected:</div>
+          <div class="ticket-val">Monetary fields should consistently be integers representing the smallest currency unit according to the API documentation.<br><br>For example:<br>If the intended amount is $53.62, the documented representation would be 5362.</div>
+        </div>
+        <div class="ticket-field">
+          <div class="ticket-label">Impact:</div>
+          <div class="ticket-val">Clients may interpret the values incorrectly, resulting in inaccurate revenue calculations and financial reporting.</div>
+        </div>
+        <div class="ticket-field">
+          <div class="ticket-label">Suggested fix:</div>
+          <div class="ticket-val">Return monetary fields consistently using integer smallest-unit values, or formally update the API contract and consumers if decimal currency values are intended.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Assumption / Limitations -->
+    <section id="assumptions" class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">6. Assumption / Limitations</h2>
+        </div>
+      </div>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 1.25rem;">
+        <p style="font-size: 0.9375rem; color: #334155; line-height: 1.6;">
+          The provided data does not define how refunded orders should be treated for revenue, so this assumption should be confirmed with Finance.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      Phyllo Product Analyst Intern Assignment — Ankalaiah Bandlamudi
+    </div>
+  </footer>
+
+  <script>
+    function copyText(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
